@@ -17,11 +17,12 @@ body {
 .main {
     width: 100vw;
     min-height: 100vh;
-    overflow: visible;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    background: radial-gradient(circle, #F7D8E5 0%, #DBB7D6 100%);
+    /* Sugar Petals to Lavender Love */
 }
 
 .main:before {
@@ -72,7 +73,7 @@ body {
     height: 320px;
     width: 90vw;
     max-width: 450px;
-    background-color: #e03131;
+    background-color: #8D262F;
     position: relative;
     display: flex;
     justify-content: center;
@@ -94,7 +95,7 @@ body {
 
 /* Lid when closed - COVERS EVERYTHING */
 .lid.one {
-    border-top: 160px solid #ff6b6b;
+    border-top: 160px solid #EC3430;
     transform: rotateX(0deg);
     z-index: 3;
     transition-delay: 0.75s;
@@ -102,7 +103,7 @@ body {
 
 /* Lid when opened */
 .lid.two {
-    border-top: 160px solid #e03131;
+    border-top: 160px solid #8D262F;
     transform: rotateX(90deg);
     z-index: 1;
     transition-delay: 0.5s;
@@ -111,15 +112,15 @@ body {
 .envelope {
     position: absolute;
     height: 100%;
-    min-height: 400px;
+    min-height: 550px;
     width: 100%;
     top: 0;
     left: 0;
     border-top: 160px solid transparent;
-    border-right: 45vw solid #ff8787;
+    border-right: 45vw solid #EE8778;
     /* Soft Red-Pink */
-    border-bottom: 160px solid #ff8787;
-    border-left: 45vw solid #ffa8a8;
+    border-bottom: 160px solid #EE8778;
+    border-left: 45vw solid #EF6CA1;
     /* Lighter Pink Side */
     z-index: 3;
 }
@@ -131,7 +132,7 @@ body {
     width: 92%;
     /* Slightly wider for better text layout */
     height: auto;
-    min-height: 350px;
+    height: 500px;
     z-index: 2;
     transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -171,7 +172,7 @@ body {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 18px;
-    color: #c2255c;
+    color: #EC3430;
     line-height: 1.4;
 }
 
@@ -179,7 +180,7 @@ body {
     text-align: center;
     font-size: 15px;
     margin-bottom: 14px;
-    color: #4b0b1e;
+    color: #8D262F;
     line-height: 1.7;
 }
 
@@ -227,7 +228,7 @@ body {
 
 /* 2. Cards slide UP out of envelope */
 .wrapper.active .cards-stack {
-    transform: translateY(-420px);
+    transform: translateY(-520px);
     transition-delay: 0.5s;
 }
 
@@ -290,18 +291,18 @@ body {
     }
 
     .lid.one {
-        border-top: 190px solid #ff6b6b;
+        border-top: 190px solid #EC3430;
     }
 
     .lid.two {
-        border-top: 190px solid #e03131;
+        border-top: 190px solid #8D262F;
     }
 
     .envelope {
         border-top: 190px solid transparent;
-        border-right: calc(45vw) solid #ff8787;
-        border-bottom: 190px solid #ff8787;
-        border-left: calc(45vw) solid #ffa8a8;
+        border-right: calc(45vw) solid #EE8778;
+        border-bottom: 190px solid #EE8778;
+        border-left: calc(45vw) solid #EF6CA1;
     }
 
     .letter-title {
@@ -324,7 +325,7 @@ body {
 /* Large screens */
 @media (min-width: 1024px) {
     .wrapper {
-        height: 420px;
+        height: 450px;
         max-width: 580px;
     }
 
@@ -335,18 +336,18 @@ body {
     }
 
     .lid.one {
-        border-top: 210px solid #ff6b6b;
+        border-top: 210px solid #EC3430;
     }
 
     .lid.two {
-        border-top: 210px solid #e03131;
+        border-top: 210px solid #8D262F;
     }
 
     .envelope {
         border-top: 210px solid transparent;
-        border-right: 290px solid #ff8787;
-        border-bottom: 210px solid #ff8787;
-        border-left: 290px solid #ffa8a8;
+        border-right: 290px solid #EE8778;
+        border-bottom: 210px solid #EE8778;
+        border-left: 290px solid #EF6CA1;
     }
 
     .letter-title {
@@ -389,7 +390,7 @@ body {
     position: absolute;
     top: -10vh;
     /* Start above screen */
-    color: #ff8787;
+    color: #EF6CA1;
     animation: fallDown linear infinite;
     user-select: none;
 }

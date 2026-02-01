@@ -10,21 +10,22 @@ body {
     font-family: "Nunito";
 }
 
+.main:before {
+    background: radial-gradient(circle, rgba(255, 240, 245, 0) 0, #fff5f7 100%);
+}
+
 .main {
     width: 100vw;
     min-height: 100vh;
-    /* position: fixed; */
-    overflow: hidden;
+    overflow: visible;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    /* padding: 120px 24px 160px 24px; */
 }
 
 .main:before {
     background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
-    /* position: absolute; */
     content: "";
     z-index: 2;
     width: 100%;
@@ -36,7 +37,6 @@ body {
     content: "";
     background-image: url("/src/Assets/grid.svg");
     z-index: 1;
-    /* position: absolute; */
     width: 100%;
     height: 100%;
     top: 0;
@@ -50,9 +50,367 @@ body {
     margin-bottom: 1rem;
 }
 
-
 @media screen and (max-width: 640px) {
     .main {
         padding: 0;
+    }
+}
+
+/* Mobile-First Envelope Animation Styles */
+.envelope-scene {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    perspective: 2000px;
+    overflow: visible;
+}
+
+.wrapper {
+    height: 320px;
+    width: 90vw;
+    max-width: 450px;
+    background-color: #e03131;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    z-index: 5;
+}
+
+.lid {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    border-right: 45vw solid transparent;
+    border-bottom: 160px solid transparent;
+    border-left: 45vw solid transparent;
+    transform-origin: top;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Lid when closed - COVERS EVERYTHING */
+.lid.one {
+    border-top: 160px solid #ff6b6b;
+    transform: rotateX(0deg);
+    z-index: 3;
+    transition-delay: 0.75s;
+}
+
+/* Lid when opened */
+.lid.two {
+    border-top: 160px solid #e03131;
+    transform: rotateX(90deg);
+    z-index: 1;
+    transition-delay: 0.5s;
+}
+
+.envelope {
+    position: absolute;
+    height: 100%;
+    min-height: 400px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    border-top: 160px solid transparent;
+    border-right: 45vw solid #ff8787;
+    /* Soft Red-Pink */
+    border-bottom: 160px solid #ff8787;
+    border-left: 45vw solid #ffa8a8;
+    /* Lighter Pink Side */
+    z-index: 3;
+}
+
+/* Cards Stack - EXACTLY like original letter design */
+.cards-stack {
+    position: absolute;
+    top: 0;
+    width: 92%;
+    /* Slightly wider for better text layout */
+    height: auto;
+    min-height: 350px;
+    z-index: 2;
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: center bottom;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.letter-content {
+    padding-top: 100px;
+    padding: 25px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: visible;
+}
+
+.letter-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 18px;
+    color: #c2255c;
+    line-height: 1.4;
+}
+
+.letter-text {
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 14px;
+    color: #4b0b1e;
+    line-height: 1.7;
+}
+
+.tap-hint {
+    text-align: center;
+    font-size: 13px;
+    color: #888;
+    margin-top: 20px;
+    font-style: italic;
+    animation: pulse 2s infinite;
+}
+
+.reset-hint {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 15px;
+    color: #666;
+    font-weight: 500;
+    padding: 0 20px;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Animation sequence - EXACTLY like original */
+/* 1. Envelope opens - lid goes up */
+.wrapper.active .lid.one {
+    transform: rotateX(90deg);
+    transition-delay: 0s;
+}
+
+.wrapper.active .lid.two {
+    transform: rotateX(180deg);
+    transition-delay: 0.25s;
+}
+
+/* 2. Cards slide UP out of envelope */
+.wrapper.active .cards-stack {
+    transform: translateY(-420px);
+    transition-delay: 0.5s;
+}
+
+/* 3. Envelope closes */
+.wrapper.active .lid.one {
+    animation: closeLid 0.8s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
+}
+
+.wrapper.active .lid.two {
+    animation: closeLidTwo 0.8s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
+}
+
+/* 4. Cards settle down to readable position */
+.cards-stack.settled {
+    transform: translateY(-60px) !important;
+    z-index: 20;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes closeLid {
+    0% {
+        transform: rotateX(90deg);
+        z-index: 1;
+    }
+
+    /* Ensure the lid stays behind the cards once they pop out */
+    100% {
+        transform: rotateX(0deg);
+        z-index: 1;
+    }
+}
+
+@keyframes closeLidTwo {
+    to {
+        transform: rotateX(90deg);
+        z-index: 1;
+    }
+}
+
+/* Special message container */
+.special-message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Tablet and Desktop - Slightly larger */
+@media (min-width: 640px) {
+    .wrapper {
+        height: 380px;
+        max-width: 520px;
+    }
+
+    .lid {
+        border-right: calc(45vw) solid transparent;
+        border-bottom: 190px solid transparent;
+        border-left: calc(45vw) solid transparent;
+    }
+
+    .lid.one {
+        border-top: 190px solid #658ced;
+    }
+
+    .lid.two {
+        border-top: 190px solid #3760C9;
+    }
+
+    .envelope {
+        border-top: 190px solid transparent;
+        border-right: calc(45vw) solid #ff8787;
+        border-bottom: 190px solid #ff8787;
+        border-left: calc(45vw) solid #ffa8a8;
+    }
+
+    .letter-title {
+        font-size: 23px;
+    }
+
+    .letter-text {
+        font-size: 16px;
+    }
+
+    .wrapper.active .cards-stack {
+        transform: translateY(-480px);
+    }
+
+    .cards-stack.settled {
+        transform: translateY(-70px) !important;
+    }
+}
+
+/* Large screens */
+@media (min-width: 1024px) {
+    .wrapper {
+        height: 420px;
+        max-width: 580px;
+    }
+
+    .lid {
+        border-right: 290px solid transparent;
+        border-bottom: 210px solid transparent;
+        border-left: 290px solid transparent;
+    }
+
+    .lid.one {
+        border-top: 210px solid #658ced;
+    }
+
+    .lid.two {
+        border-top: 210px solid #3760C9;
+    }
+
+    .envelope {
+        border-top: 210px solid transparent;
+        border-right: 290px solid #C4DFF0;
+        border-bottom: 210px solid #C4DFF0;
+        border-left: 290px solid #a4d4f2;
+    }
+
+    .letter-title {
+        font-size: 25px;
+    }
+
+    .letter-text {
+        font-size: 17px;
+    }
+
+    .wrapper.active .cards-stack {
+        transform: translateY(-520px);
+    }
+
+    .cards-stack.settled {
+        transform: translateY(-90px) !important;
+    }
+}
+
+/* Romantic Background Icons - Falling Edition */
+.bg-icons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+    overflow: hidden;
+}
+
+.bg-icons.visible {
+    opacity: 0.5;
+    /* Slightly more visible for the falling effect */
+}
+
+.floating-icon {
+    position: absolute;
+    top: -10vh;
+    /* Start above screen */
+    color: #ff8787;
+    animation: fallDown linear infinite;
+    user-select: none;
+}
+
+@keyframes fallDown {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        /* Move to bottom */
+        opacity: 0;
     }
 }

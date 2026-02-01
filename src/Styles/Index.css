@@ -290,11 +290,11 @@ body {
     }
 
     .lid.one {
-        border-top: 190px solid #658ced;
+        border-top: 190px solid #ff6b6b;
     }
 
     .lid.two {
-        border-top: 190px solid #3760C9;
+        border-top: 190px solid #e03131;
     }
 
     .envelope {
@@ -335,18 +335,18 @@ body {
     }
 
     .lid.one {
-        border-top: 210px solid #658ced;
+        border-top: 210px solid #ff6b6b;
     }
 
     .lid.two {
-        border-top: 210px solid #3760C9;
+        border-top: 210px solid #e03131;
     }
 
     .envelope {
         border-top: 210px solid transparent;
-        border-right: 290px solid #C4DFF0;
-        border-bottom: 210px solid #C4DFF0;
-        border-left: 290px solid #a4d4f2;
+        border-right: 290px solid #ff8787;
+        border-bottom: 210px solid #ff8787;
+        border-left: 290px solid #ffa8a8;
     }
 
     .letter-title {
